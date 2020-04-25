@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>个人模板</title>
+  <meta name="keywords" content="关键词">
+  <meta name="description" content="描述">
+  <meta name="author" content="史珍香">
+  <style>
+        body{font-family: "Microsoft YaHei",Serif;}
+        body,dl,dd,p,h1,h2,h3,h4,h5,h6{margin: 0;}
+        ol,ul,li{list-style: none;margin: 0;padding: 0;}
+        img{border: none;}
+    </style>
+</head>
+<body>
+    <div id="wrap"></div>
+    <script>
+        /*
+        定义变量的意义：把一些值储存起来，后面需要使用这些值的时候直接用变量名代表这些值使用;操作标签只能从存储的标签开始。
+        如何声明变量:
+            在ES5中使用var关键词声明一个变量。
+            例：var a=10;
+            在ES6及以后的版本中使用let关键词声明一个变量。
+            例：let a=10;
+        ES5定义变量关键词：
+            var
+            function  定义函数
+        ES6定义变量关键词：
+            let
+            const  定义常量 特点：定义时必须赋值,且值不能重新赋值。
+            function
+        定义变量时注意事项：
+            -要么全部使用ES5的规则定义变量，要么全部使用ES6的规则定义变量，不能穿插使用。
+            -定义变量的时候同一作用域里面把变量名统一放在执行代码前面，先定义再使用。
+            -同一变量名，在相同作用域，多次声明是没有意义的。如果在ES6中这样使用，会报错！
+            -声明变量时，可以同时声明多个变量，必须用逗号隔开。
+            -定义变量时，决定不能无中生有，必须使用关键词定义，否则ES6会报错！
+            -定义变量时 = 右边可以是确切的值，或者一个表达式。
+            -可以先只定义，不赋值，再后续使用过程中赋值。
+        定义变量的规则：
+            -不允许使用关键词/保留词；
+            例：let let=10;
+            例：ES5版本的保留词class,在ES6版本中成为了关键词。
+            -不能使用JS里具有实际意义的变量名。
+            例：let document=10;let alert=10;
+            -变量命名时组成变量的字符必须是：数字 字母 _ $四种字符,不能以数字开头。     *
+            例：let $789=10;
+                let $abc=10;
+                let _789=10;
+                let _abc=10;
+                let _$abc=;
+                .....
+            -见名知意。
+            例： let oWrap= document.getElementById("wrap");
+            -采用驼峰命名法：多个单词拼接命名时首字母大写。
+            例：getElementById
+
+        */
+    </script>
+</body>
+</html>
