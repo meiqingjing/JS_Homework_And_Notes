@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>个人模板</title>
+    <meta name="keywords" content="关键词">
+    <meta name="description" content="描述">
+    <meta name="author" content="史珍香">
+    <style>
+        body{font-family: "Microsoft YaHei",Serif;}
+        body,dl,dd,p,h1,h2,h3,h4,h5,h6{margin: 0;}
+        ol,ul,li{list-style: none;margin: 0;padding: 0;}
+        img{border: none;}
+        #wrap{
+            width: 200px;
+            height: 50px;
+            background-color: pink;
+        }
+        #nwe{
+            width: 200px;
+            height: 50px;
+            background-color: pink;
+        }
+        div{
+            margin-top: 50px;
+            margin-left: 50px;
+        }
+    </style>
+</head>
+<body>
+    <div id="wrap"></div>
+    <div id="nwe"></div>
+    <script>
+        var oWrap = document.getElementById("wrap"),
+            oNwe = document.getElementById("nwe");
+        /*oWrap.onmouseenter = function () {
+            oNwe.innerText = "添加文字成功！";
+        };
+        oWrap.onmouseleave = function () {
+            oNwe.innerText = "";
+        };
+        oNwe.onmouseenter = function () {
+            oWrap.innerText = "添加文字成功！";
+        };
+        oNwe.onmouseleave = function () {
+            oWrap.innerText = "";
+        };*/
+        function oenter() {
+            oNwe.innerText = "添加文字成功！";
+            oWrap.innerText = "添加文字成功！";
+            this.innerText = "";
+
+        };
+        function oleave() {
+            oNwe.innerText = "";
+            oWrap.innerText = "";
+        };
+        oWrap.onmouseenter=oenter;
+        oWrap.onmouseleave=oleave;
+        oNwe.onmouseenter=oenter;
+        oNwe.onmouseleave=oleave;
+    </script>
+</body>
+</html>
