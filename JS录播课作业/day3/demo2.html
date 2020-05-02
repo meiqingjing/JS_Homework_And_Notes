@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        #box{
+            position: relative;
+            width: 200px;
+            height: 200px;
+            border: 1px solid red;
+        }
+        #box div.menu{
+            position: absolute;
+            left: 0;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            margin: auto;
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background-color: #FFC0CB;
+            font-size: 14px;
+            font-weight: 700;
+            text-align: center;
+            line-height: 80px;
+            user-select: none;
+            transition: transform 1s;
+        }
+
+        #box div.nav{
+            position: absolute;
+            top: 0;
+            left:0;
+            width: 80px;
+            height: 80px;
+            background-color: aquamarine;
+            border-radius: 50%;
+            font-size: 12px;
+            line-height: 80px;
+            text-align: center;
+            user-select: none;
+            transform: translate(60px,60px) scale(0);
+            transition: transform 1s;
+        }
+        #box.active div.menu{
+            transform: scale(0);
+        }
+        #box.active div.nav:nth-child(2){
+            transform: translate(0px,0px)scale(1);
+        }
+        #box.active div.nav:nth-child(3){
+            transform: translate(120px,0px)scale(1);
+        }
+        #box.active div.nav:nth-child(4){
+            transform: translate(0px,120px)scale(1);
+        }
+        #box.active div.nav:nth-child(5){
+            transform: translate(120px,120px)scale(1);
+        }
+    </style>
+</head>
+<body>
+<div id="box">
+    <div class="menu">菜单</div>
+    <div class="nav">首页</div>
+    <div class="nav">登录</div>
+    <div class="nav">注册</div>
+    <div class="nav">文章</div>
+</div>
+    <script>
+        var oMenu = document.querySelector("#box div.menu");
+        var oBox = document.getElementById("box");
+        oMenu.onclick = function(){
+            oBox.className = "active";
+        }
+        /*var oMenu = document.querySelector("#box div.menu");
+        var oNav = document.querySelectorAll("#box div.nav");
+        oMenu.onclick = function(){
+            this.className += " active";
+            oNav[0].className += " active";
+            oNav[1].className += " active";
+            oNav[2].className += " active";
+            oNav[3].className += " active";
+        }*/
+    </script>
+</body>
+</html>
