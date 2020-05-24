@@ -2,9 +2,99 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>轮播图</title>
+    <title>字体放大作业</title>
+    <style>
+        *{margin: 0;}
+        body{
+            padding: 50px 25px;
+        }
+        #wrap .box{
+            display: inline-block;
+            width: 50px;
+            height: 50px;
+            background-color: black;
+            color: aliceblue;
+            text-align: center;
+            line-height: 50px;
+            cursor: pointer;
+            user-select: none;
+        }
+        #wrap .text{
+            font-size: 16px;
+        }
+        #wrap img{
+            width: 500px;
+            height: 300px;
+        }
+    </style>
 </head>
 <body>
-
+    <div id="wrap">
+        <div class="box">+</div>
+        <div class="box">-</div>
+        <div class="text">
+            <p class="txt">这两天是不是梅雨季节啊？怎么这雨一天接一天的，
+                衣服都不干，我要没有衣服穿啦！每年这个时候我就想回家，
+                家里干干的比较舒服。 那么问题来了在这种潮湿的天气里我们应该注意什么，
+                做点什么医美项目呢？ 其实呢我们女孩子对潮湿的天气比较敏感，
+                那我们就可以考虑多做一些私密的项目来给自己做一个保养，
+                做好护阴真的非常重要，我其实也是有做过的，觉得也没啥不好意思说的，
+                而且我觉的这是一个新时代女生的代表，所以作为女孩子，我们做起来吧。</p>
+            <img src="./imges/1.jpg" alt="">
+            <p class="txt">这两天是不是梅雨季节啊？怎么这雨一天接一天的，
+                衣服都不干，我要没有衣服穿啦！每年这个时候我就想回家，
+                家里干干的比较舒服。 那么问题来了在这种潮湿的天气里我们应该注意什么，
+                做点什么医美项目呢？ 其实呢我们女孩子对潮湿的天气比较敏感，
+                那我们就可以考虑多做一些私密的项目来给自己做一个保养，
+                做好护阴真的非常重要，我其实也是有做过的，觉得也没啥不好意思说的，
+                而且我觉的这是一个新时代女生的代表，所以作为女孩子，我们做起来吧。</p>
+            <img src="./imges/1.jpg" alt="">
+        </div>
+    </div>
+    <script>
+        /*老师讲解后的作业*/
+        var oBox1 = document.querySelectorAll("#wrap .box")[0];
+        var oBox2 = document.querySelectorAll("#wrap .box")[1];
+        var oWrap = document.querySelector("#wrap .text");
+        var size = 16;
+        /*字体大小变大*/
+        oBox1.onclick = function () {
+            if (size < 30) {
+                size++;
+                oWrap.style.fontSize = size + "px";
+            }
+        };
+        /*字体大变小*/
+        oBox2.onclick = function () {
+            if (size > 12) {
+                size--;
+                oWrap.style.fontSize = size + "px";
+            }
+        };
+        /*自己写的作业*/
+        /*var oBox = document.getElementsByClassName("box");
+        var oP = document.querySelectorAll(".txt");
+        var index = 16;
+        /!*字体大小变大*!/
+        oBox[0].onclick = function () {
+            if(index<=16){
+                oP[0].style.fontSize = index+"px";
+                oP[1].style.fontSize = index+"px";
+            }else {
+                oP[0].style.fontSize = index-- +"px";
+                oP[1].style.fontSize = index-- +"px";
+            }
+        };
+        /!*字体大变小*!/
+        oBox[1].onclick = function () {
+            if(index>=30){
+                oP[0].style.fontSize = 30+"px";
+                oP[1].style.fontSize = 30+"px";
+            }else {
+                oP[0].style.fontSize = index++ +"px";
+                oP[1].style.fontSize = index++ +"px";
+            }
+        };*/
+    </script>
 </body>
 </html>

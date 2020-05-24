@@ -2,47 +2,55 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>侧边栏</title>
+    <title>评论提交</title>
     <style>
-        #box{
-            display: none;
-            position: fixed;
-            top: 100px;
-            width: 50px;
-            height: 300px;
-            background-color: #FFC0CB;
+        *{
+            margin: 0;
+            padding: 0;
         }
-        .bto{
-            display: inline-block;
-            position: absolute;
-            top: 300px;
-            width: 50px;
-            height: 50px;
-            background-color: aliceblue;
-            font-size: 50px;
-            text-align: center;
-            line-height: 50px;
-            user-select: none;
-            cursor: pointer;
+        #box{
+            width: 500px;
+            margin: 50px auto;
+        }
+        #box #area{
+            width: 100%;
+            height: 100px;
+            resize: none;
+        }
+        #box #btn{
+            float: right;
+        }
+        #box ul#list{
+            margin-top: 50px;
+            list-style: none;
+        }
+        #box ul#list li{
+            line-height: 30px;
+            border-bottom: 1px dotted;
         }
     </style>
 </head>
 <body>
-
     <div id="box">
+        <textarea id="area" ></textarea>
+        <input type="button" id="btn" value="提交">
+        <ul id="list">
+           <!-- <li>1232</li>-->
+        </ul>
     </div>
-    <span class="bto">></span>
     <script>
-        var oBox = document.getElementById("box");
-        var oBto = document.getElementsByClassName("bto");
-        var index=true;
-        oBto[0].onclick = function(){
-            if(index){
-                oBox.style.display = "block";
-                index= false;
-            } else{
-                oBox.style.display = "none";
-                index=true;
+        var oText = document.getElementById("area");
+        var oBtn = document.getElementById("btn");
+        var oList = document.getElementById("list");
+        oBtn.onclick = function () {
+            /*获取area里面的内容*/
+            var val = oText.value;
+            //console.log(txt);
+            if(val){
+                /*把获取到的内容添加到ul标签里面*/
+                oList.innerHTML += "<li>"+val+"</li>";
+                /*每次提交内容后清空输入内容*/
+                oText.value="";
             }
         }
     </script>

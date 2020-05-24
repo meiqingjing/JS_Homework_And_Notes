@@ -2,67 +2,117 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>字体放大作业</title>
+    <title>侧边栏</title>
     <style>
-        *{margin: 0;}
-        .box{
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        #side .btn{
             display: inline-block;
+            position: fixed;
+            left: 0;
+            bottom: 15%;
             width: 50px;
             height: 50px;
-            background-color: black;
-            color: aliceblue;
-            text-align: center;
-            line-height: 50px;
-            cursor: pointer;
+            background: url("./imges/icon.png") 0px 0px;
             user-select: none;
+            cursor: pointer;
         }
-        img{
-            width: 500px;
-            height: 300px;
+        #side .side-content{
+            padding-top: 100px;
+            position: fixed;
+            left: 0;
+            width: 50px;
+            height: 100%;
+            background-color: #636363;
+            text-align: center;
+            transition: 0.3s;
+        }
+        #side .side-content li{
+            margin-top: 20px;
+        }
+        #side.show .side-content{
+            left: -50px;
+        }
+        #side.show .btn{
+            background-position: 0 -60px;
         }
     </style>
 </head>
 <body>
-    <div class="box">-</div>
-    <div class="box">+</div>
-    <p class="txt">这两天是不是梅雨季节啊？怎么这雨一天接一天的，
-        衣服都不干，我要没有衣服穿啦！每年这个时候我就想回家，
-        家里干干的比较舒服。 那么问题来了在这种潮湿的天气里我们应该注意什么，
-        做点什么医美项目呢？ 其实呢我们女孩子对潮湿的天气比较敏感，
-        那我们就可以考虑多做一些私密的项目来给自己做一个保养，
-        做好护阴真的非常重要，我其实也是有做过的，觉得也没啥不好意思说的，
-        而且我觉的这是一个新时代女生的代表，所以作为女孩子，我们做起来吧。</p>
-    <img src="1.jpg" alt="">
-    <p class="txt">这两天是不是梅雨季节啊？怎么这雨一天接一天的，
-        衣服都不干，我要没有衣服穿啦！每年这个时候我就想回家，
-        家里干干的比较舒服。 那么问题来了在这种潮湿的天气里我们应该注意什么，
-        做点什么医美项目呢？ 其实呢我们女孩子对潮湿的天气比较敏感，
-        那我们就可以考虑多做一些私密的项目来给自己做一个保养，
-        做好护阴真的非常重要，我其实也是有做过的，觉得也没啥不好意思说的，
-        而且我觉的这是一个新时代女生的代表，所以作为女孩子，我们做起来吧。</p>
-    <img src="1.jpg" alt="">
+    <div id="side">
+        <ul class="side-content">
+            <li><img src="./imges/bq1.png" alt=""></li>
+            <li><img src="./imges/bq2.png" alt=""></li>
+            <li><img src="./imges/bq3.png" alt=""></li>
+            <li><img src="./imges/bq4.png" alt=""></li>
+            <li><img src="./imges/bq5.png" alt=""></li>
+        </ul>
+        <span class="btn"></span>
+    </div>
     <script>
-        var oBox = document.getElementsByClassName("box");
-        var oP = document.querySelectorAll(".txt");
-        var index = 16;
-        oBox[0].onclick = function () {
-            if(index<=16){
-                oP[0].style.fontSize = index+"px";
-                oP[1].style.fontSize = index+"px";
+        /*老师toggle版*/
+        /*var oSide=document.getElementById("side");
+        var oBtn = document.querySelector(".btn");
+        oBtn.onclick = function () {
+            oSide.classList.toggle("show");
+        };*/
+        /*不能toggle的时候写法1*/
+        /*var oSide=document.getElementById("side");
+        var oBtn = document.querySelector(".btn");
+        var index =true;
+        oBtn.onclick = function () {
+            if (index) {
+                oSide.classList.add("show");
             }else {
-                oP[0].style.fontSize = index-- +"px";
-                oP[1].style.fontSize = index-- +"px";
+                oSide.classList.remove("show");
             }
-        }
-        oBox[1].onclick = function () {
-            if(index>=30){
-                oP[0].style.fontSize = 30+"px";
-                oP[1].style.fontSize = 30+"px";
+            index = !index;
+        };*/
+        /*不能toggle的时候写法2（三目写法）*/
+        var oSide=document.getElementById("side");
+        var oBtn = document.querySelector(".btn");
+        var index =true;
+        oBtn.onclick = function () {
+            oSide.classList[index?"add":"remove"]("show");
+            index = !index;
+            /*if (index) {
+                oSide.classList["add"]("show");
             }else {
-                oP[0].style.fontSize = index++ +"px";
-                oP[1].style.fontSize = index++ +"px";
+                oSide.classList["remove"]("show");
+            }*/
+        };
+        /*老师写的正常写法*/
+        /*var oSide=document.getElementById("side");
+        var oBtn = document.querySelector(".btn");
+        var index =true;
+        oBtn.onclick = function () {
+            if (index) {
+                oSide.classList.add("show");
+                index=false
+            }else {
+                oSide.classList.remove("show");
+                index=true;
             }
-        }
+        };*/
+
+        /*自己写的*/
+        /*var oSide = document.getElementById("side");
+        var oBtn = document.getElementsByClassName("btn")[0];
+        var oContent = document.querySelectorAll("")
+        var index=true;
+        oBtn.onclick = function(){
+            if(index){
+                oBox.classList.add("owidth");
+                this.classList.add("bkg");
+                index= false;
+            } else{
+                oBox.classList.toggle("owidth");
+                this.classList.toggle("bkg");
+                index=true;
+            }
+        };*/
     </script>
 </body>
 </html>
