@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>九九乘法表</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        .box{
+            margin: 10px 50px;
+            width: 900px;
+        }
+        .box span{
+            display: inline-block;
+            margin: 2px 2px;
+            width: 70px;
+            height: 40px;
+            border: 1px solid blue;
+            text-align: center;
+            line-height: 40px;
+        }
+        .line{
+            width: 100%;
+            height: 5px;
+            border: 1px solid #636363;
+        }
+    </style>
+</head>
+<body>
+    <div id="box1" class="box"></div>
+    <div class="line"></div>
+    <div id="box2" class="box"></div>
+    <div class="line"></div>
+    <div id="box3" class="box"></div>
+
+    <script>
+        /*第一种九九乘法表*/
+        var oBox1 = document.getElementById("box1");
+        var index1="";
+        for(var i=1;i<=9;i++){
+            for(var j=1;j<=i;j++){
+                index1 += "<span>"+i+"x"+j+"="+i*j+"</span>";
+            }
+            index1 += "<br>";
+        }
+        oBox1.innerHTML += index1;
+
+        /*第二种九九乘法表*/
+        var oBox2 = document.getElementById("box2");
+        var index2 = "";
+        for(var a=1;a<=9;a++){
+            for(var b=a;b<=9;b++){
+                //index2 += "<span>"+"</span>";
+                index2 += "<span>"+a+"x"+b+"="+a*b+"</span>";
+            }
+            index2 += "<br>";
+        }
+        oBox2.innerHTML += index2;
+
+        /*第三种九九乘法表*/
+        var oBox3 = document.getElementById("box3");
+        var index3 = "";
+        for(var c=9;c>=1;c--){
+            for(var d=1;d<=c;d++){
+                index3 += "<span>"+c+"x"+d+"="+c*d+"</span>";
+            }
+            index3 += "<br>";
+        }
+        oBox3.innerHTML += index3;
+    </script>
+</body>
+</html>

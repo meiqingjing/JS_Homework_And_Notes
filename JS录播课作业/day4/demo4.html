@@ -73,6 +73,7 @@
 </head>
 <body>
     <div id="banner">
+        <!--图片-->
         <div class="img">
             <img class="active" src="./imges/1.jpeg" alt="wu">
             <img src="./imges/2.jpeg" alt="wu">
@@ -80,10 +81,12 @@
             <img src="./imges/4.jpeg" alt="wu">
             <img src="./imges/5.jpeg" alt="wu">
         </div>
+        <!--按钮-->
         <div class="btn">
             <div class="left"></div>
             <div class="right"></div>
         </div>
+        <!--模式控制-->
         <div class="model">
             <span class="normal active">正常模式</span>
             <span class="cycle">循环模式</span>
@@ -93,12 +96,8 @@
         var oLeft = document.querySelector("#banner .btn .left");
         var oRight = document.querySelector("#banner .btn .right");
         var aImg = document.querySelectorAll("#banner .img img");
-        var oNormal =document.querySelector("#banner .model .normal");
-        var oCycle =document.querySelector("#banner .model .cycle");
-        //var oList = document.querySelectorAll("#banner .txt .list li");
         var index = 0;/*声明一个变量储存当前的图片是第几张*/
         var len = aImg.length;/*声明一个变量来储存图片的最大长度*/
-        var state = true;
         /*正常模式*/
         function single(){
             /*左边按钮*/
@@ -117,8 +116,7 @@
                     aImg[index].classList.add("active");
                 }
             };
-        }
-        single();//因为默认是正常模式，所以先调用一次。
+        };
         /*循环模式*/
         function cycle(){
             /*左边按钮*/
@@ -134,13 +132,17 @@
             oRight.onclick = function () {
                 aImg[index].classList.remove("active");//1、删除active类名，先清零
                 index++;//2、执行index--
-                if(index>len-1){
+                index %= len;//if简写%=
+                /*if(index>len-1){
                     index=0;//判断index如果大于img最大长度，强行重新赋值为0
-                }
+                }*/
                 aImg[index].classList.add("active");//4、添加active类名
             };
-        }
+        };
         /*模式控制*/
+        single();//因为默认是正常模式，所以先调用一次。
+        var oNormal =document.querySelector("#banner .model .normal");
+        var oCycle =document.querySelector("#banner .model .cycle");
         /*正常模式*/
         oNormal.onclick=function () {
             this.classList.add("active");
