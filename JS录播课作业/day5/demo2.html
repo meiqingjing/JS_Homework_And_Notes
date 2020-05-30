@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>选项卡特效</title>
+    <link rel="stylesheet" href="../css/reset.css">
+    <style>
+        #box{
+            position: relative;
+            margin: 50px auto;
+            width: 282px;
+            height: 240px;
+            border: 1px solid rgb(224,224,224);
+        }
+        #box .tab{
+            width: 100%;
+            height: 31px;
+            background: url("./imges/bg1.gif");
+        }
+        #box .tab p{
+            float: left;
+            width: 94px;
+            height: 32px;
+            font-size: 14px;
+            text-align: center;
+            line-height: 32px;
+            cursor: pointer;
+            user-select: none;
+        }
+        #box .tab p.active{
+            color: #fff;
+            background-image: url("./imges/bg2.gif");
+        }
+        #box .content{
+            width: 282px;
+            height: 218px;
+        }
+        #box .content .list{
+            display: none;
+            margin:10px 16px 0 16px;
+            position: absolute;
+            left: 0;
+            top:31px;
+            width: 250px;
+            height: 209px;
+        }
+        #box .content .list.active{
+            display: block;
+        }
+        #box .content .list li{
+            border-bottom: 1px dashed #ddd;
+            line-height: 39px;
+        }
+        #box .content .list li a{
+            margin-left: 18px;
+            color: #000;
+        }
+        #box .content .list li a:hover{
+            color: #FF0000;
+        }
+        #box .content .list li span{
+            display: inline-block;
+            width: 21px;
+            height: 15px;
+            background: url("./imges/but.gif");
+            color: #fff;
+            text-align: center;
+            line-height: 15px;
+        }
+
+    </style>
+</head>
+<body>
+    <div id="box">
+        <div class="tab">
+            <p class="active">热门排行</p>
+            <p>美图速递</p>
+            <p>社区Top</p>
+        </div>
+        <div class="content">
+            <ul class="list active">
+                <li><span>1</span><a href="#">产后妈妈分享：成功祛除妊娠纹经历</a></li>
+                <li><span>2</span><a href="#">营养不足 你初老了吗</a></li>
+                <li><span>3</span><a href="#">儿童淘气不要急 父母巧应对</a></li>
+                <li><span>4</span><a href="#">孕妇产力不足 临产小诀窍</a></li>
+                <li><span>5</span><a href="#">新生儿脸色发黄 注意补充营养</a></li>
+            </ul>
+            <ul class="list">
+                <li><span>1</span><a href="#">[重磅推荐]大量涉黄场所被清剿</a></li>
+                <li><span>2</span><a href="#">[高清大图]胡兵复古大片激情四射</a></li>
+                <li><span>3</span><a href="#">[活色生香]贝嫂内衣写真玉体横陈</a></li>
+                <li><span>4</span><a href="#">[高清大图]倪妮表情鬼马俏皮可爱</a></li>
+                <li><span>5</span><a href="#">[重磅推荐]选美文化 在繁华中落寞</a></li>
+            </ul>
+            <ul class="list">
+                <li><span>1</span><a href="#">能遇见你就是我最大的幸福 愿得一</a></li>
+                <li><span>2</span><a href="#">最伤身体的10个生活习惯，一定要避</a></li>
+                <li><span>3</span><a href="#">儿童淘气不要急 父母巧应对</a></li>
+                <li><span>4</span><a href="#">孕妇产力不足 临产小诀窍</a></li>
+                <li><span>5</span><a href="#">新生儿脸色发黄 注意补充营养</a></li>
+            </ul>
+        </div>
+    </div>
+    <script>
+        let aTab =document.querySelectorAll("#box .tab p");
+        let oConten = document.querySelectorAll("#box .content .list");
+        let len = aTab.length;//定义一个变量来储存tab的长度
+        let index = 0;//定义一个变量来表示当前点击的是谁
+        for (let i=0;i<len;i++){
+            aTab[i].onclick = function () {
+                /*先去掉之前默认选中元素的名字*/
+                aTab[index].classList.remove("active");
+                oConten[index].classList.remove("active");
+                /*修改index值，让它变成当前被点击的元素和需要改变样式元素的序号，方便下次点击*/
+                index = i;
+                /*给当前被点击的元素和需要改变的元素添加名字*/
+                aTab[index].classList.add("active");
+                oConten[index].classList.add("active");
+            };
+        }
+    </script>
+</body>
+</html>
