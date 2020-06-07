@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>图片移动轮播效果</title>
+    <link rel="stylesheet" href="./css/reset.css">
+    <style>
+        #banner{
+            position: relative;
+            margin: 30px auto;
+            width: 820px;
+            height: 390px;
+            overflow: hidden;
+        }
+        /*图片样式*/
+        #banner .img{
+            height: 340px;
+            transition: margin-left .5s;
+        }
+        #banner .img ul li{
+            float: left;
+        }
+        /*按钮样式*/
+        #banner .btn div{
+            position: absolute;
+            top:50%;
+            margin-top: -50px;
+            z-index: 999;
+            width: 30px;
+            height: 50px;
+            background: url("./imges/icon.png") -12px 0;
+            user-select: none;
+            cursor: pointer;
+        }
+        #banner .btn .left{
+            left: 0;
+        }
+        #banner .btn .right{
+            right: 0;
+            background: url("./imges/icon.png") -12px 50px;
+        }
+        /*列表选项卡样式*/
+        #banner .list ul{
+            width: 100%;
+            height: 50px;
+            background-color: #E3E2E2;
+        }
+        #banner .list ul li{
+            float: left;
+            margin-top: -4px;
+            width: 20%;
+            height: 47px;
+            font-size: 14px;
+            text-align: center;
+            line-height: 47px;
+            color: #424242;
+            user-select: none;
+            cursor: pointer;
+        }
+        #banner .list ul li.active{
+            background-color: #fff;
+            color: #CEA861;
+            border-bottom: 2px solid #CEA861;
+        }
+    </style>
+</head>
+<body>
+    <div id="banner">
+        <!--图片-->
+        <div class="img" style="width: 500000px;margin-left: 0px">
+            <ul>
+                <li style="width: 820px"><a href="#"><img src="./imges/1.jpeg" alt=""></a></li>
+                <li><a href="#"><img src="./imges/2.jpeg" alt=""></a></li>
+                <li><a href="#"><img src="./imges/3.jpeg" alt=""></a></li>
+                <li><a href="#"><img src="./imges/4.jpeg" alt=""></a></li>
+                <li><a href="#"><img src="./imges/5.jpeg" alt=""></a></li>
+            </ul>
+        </div>
+        <!--左右按钮-->
+        <div class="btn">
+            <div class="left"></div>
+            <div class="right"></div>
+        </div>
+        <!--文字列表-->
+        <div class="list">
+            <ul>
+                <li class="active">要不要和我开黑</li>
+                <li>我压缩贼6</li>
+                <li>只要我E的够快</li>
+                <li>队友的问号</li>
+                <li>就永远追不上我</li>
+            </ul>
+        </div>
+    </div>
+    <script>
+        let oLeft = document.querySelector("#banner .btn .left");//获取左边按钮
+        let oRight = document.querySelector("#banner .btn .right");//获取右边按钮
+        let oImg = document.querySelector("#banner .img");//获取需要偏移的元素
+        let aLi = document.querySelector("#banner .img ul li");//获取单个li
+        let wLi = aLi.offsetWidth;//声明一个变量储存li的宽度，用来作为margin偏移量的值。
+        let oLi = document.querySelectorAll("#banner .list ul li");//获取所有列表li标签
+        let len = oLi.length;//声明一个变量储存li标签长度。
+        let index1 = 0;//图片初始偏移值
+        let index2 = 0;//列表初始偏移值
+        /*左边按钮*/
+        oLeft.onclick= function () {
+            /*图片模块*/
+            if( index1 >=0 ){
+                index1 = -(len*wLi);//判断：当index>=0时，强行让index偏移值margin等于负的li最大长度乘以li的宽度。
+            }
+            index1 += wLi;//每次点击index的值都加上li的宽度值
+            oImg.style.marginLeft=index1+"px";//写入偏移量margin的值
+            /*列表模块*/
+            oLi[index2].classList.remove("active");//按钮触发点击事件时，先清除列表当前默认选中的样式
+            index2--;//每次点击偏移量自减1
+            if(index2<0){
+                index2=len-1;//判断：当点击之后偏移量小于零时，强行等于最大列表长度-1；
+            }
+            oLi[index2].classList.add("active");//写入点击后的样式
+        };
+        /*右边按钮*/
+        oRight.onclick= function () {
+            /*图片模块*/
+            index1 =index1-wLi;//index初始为0，每次点击都让index减去li的宽度，
+            if(index1< -( (len-1) * wLi) ){
+                index1=0;//判断：当一系列点击之后，index的值小于li最大长度-1乘以li本身的宽度值时，强行让index值等于0
+            }
+            oImg.style.marginLeft=index1+"px";//写入偏移量margin的值
+            /*列表模块*/
+            oLi[index2].classList.remove("active");//按钮触发点击事件时，先清除列表当前默认选中的样式
+            index2++;//每次点击偏移量自增1
+            if(index2>len-1){
+                index2=0;//判断：当偏移量大于列表最大长度值时，强行回归于初始值。
+            }
+            oLi[index2].classList.add("active");//写入点击后的样式
+        };
+        /*列表模块*/
+        for(let i=0;i<len;i++){
+            oLi[i].onclick = function () {
+                oLi[index2].classList.remove("active");//列表中任意一个元素点击时，先清除之前默认选中的样式
+                index2=i;//把i的值（序号）复制一份储存到index2，表示当前被点击是谁
+                oLi[index2].classList.add("active");//写入当前被点击元素的样式
+                oImg.style.marginLeft = -(index2*wLi)+"px";
+                //列表中任意一个元素被点击时，图片的偏移量=该元素对应的序号乘以li的宽度的负数
+            };
+        }
+
+    </script>
+</body>
+</html>

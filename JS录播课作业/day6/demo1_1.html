@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>轮播</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+            user-select: none;
+        }
+        #banner{
+            position: relative;
+            margin: 50px auto;
+            width: 820px;
+            height: 370px;
+            background-color: #FF0000;
+        }
+        #banner .img{
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+        #banner .img img{
+            display: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        #banner .btn div{
+            position: absolute;
+            top:50%;
+            margin-top: -25px;
+            width: 50px;
+            height: 50px;
+            background: url("./imges/icon.png");
+            cursor: pointer;
+        }
+        #banner .img img.active{
+            display: block;
+        }
+        #banner .btn .left{
+            left: 0;
+        }
+        #banner .btn .right{
+            right: 0;
+            margin-top: -25px;
+            background: url("./imges/icon.png") 0 50px;
+        }
+        #banner .model {
+            width: 100%;
+            height: 40px;
+            text-align: center;
+
+        }
+        #banner .model span{
+            display: inline-block;
+            width: 80px;
+            height: 40px;
+            line-height: 40px;
+            background-color: #636363;
+            color: #fff;
+            user-select: none;
+            cursor: pointer;
+        }
+        #banner .model span.active{
+            background-color: #FFC0CB;
+            color: #000;
+        }
+		#banner .tab{
+			white-space: 100%;
+			height: 40px;
+			background-color: #E3E2E2;
+			
+		}
+		#banner .tab li{
+			float: left;
+			list-style: none;
+			width: 20%;
+			height: 40px;
+			text-align: center;
+			line-height: 40px;
+			color: #424242;
+		}
+		#banner .tab li.active{
+			background-color: #fff;
+			color: #CEA861;
+			border-bottom: 2px solid #CEA861;
+		}
+    </style>
+</head>
+<body>
+    <div id="banner">
+        <!--图片-->
+        <div class="img">
+            <img class="active" src="./imges/1.jpeg" alt="wu">
+            <img src="./imges/2.jpeg" alt="wu">
+            <img src="./imges/3.jpeg" alt="wu">
+            <img src="./imges/4.jpeg" alt="wu">
+            <img src="./imges/5.jpeg" alt="wu">
+        </div>
+        <!--按钮-->
+        <div class="btn">
+            <div class="left"></div>
+            <div class="right"></div>
+        </div>
+		<!-- tab列表 -->
+		<ul class="tab">
+			<li class="active">未来之礼</li>
+			<li>未来战士通行证</li>
+			<li>FPX冠军皮肤</li>
+			<li>未来战士2020</li>
+			<li>FPX冠军手办预售</li>
+		</ul>
+        <!--模式控制-->
+         <!--<div class="model">
+            <span class="normal active">正常模式</span>
+            <span class="cycle">循环模式</span>
+        </div>-->
+    </div>
+    <script>
+        (function(){
+            let oLeft = document.querySelector("#banner .btn .left");
+            let oRight = document.querySelector("#banner .btn .right");
+            let aImg = document.querySelectorAll("#banner .img img");
+            let oTab = document.querySelectorAll("#banner .tab li");
+            let len = aImg.length;/*声明一个变量来储存图片的最大长度*/
+            let index = 0;/*声明一个变量储存当前的图片是第几张*/
+            /*样式控制函数*/
+            let fnStyle = function (x) {
+                /*样式清零*/
+                aImg[index].classList.remove("active");
+                oTab[index].classList.remove("active");
+                /*改变index*/
+                index = x;
+                /*添加样式类名*/
+                aImg[index].classList.add("active");
+                oTab[index].classList.add("active");
+            };
+            /*右边按钮*/
+            oRight.onclick = function () {
+                //let a= (index+1)%len;
+                fnStyle((index+1)%len);
+            };
+            /*左边按钮*/
+            oLeft.onclick = function () {
+                fnStyle( (index-1)<0?len-1:index-1 );
+                /*let goudan = index-1;
+                if(goudan<0)goudan=len-1;
+                goudan= (index-1)<0?len-1:index-1;*/
+            };
+            /*tab循环点击事件*/
+            for(let i= 0 ;i<len;i++){
+                oTab[i].onclick = function () {
+                    fnStyle(i);
+                };
+            }
+        })();
+        /*循环模式*/
+        /*左边按钮*/
+        /*oLeft.onclick = function () {
+            aImg[index].classList.remove("active");//1、删除active类名，先清零
+            oTab[index].classList.remove("active");
+            index--;//2、执行index--
+            if(index<0){
+                index=len-1;//3、判断如果index减到0以下，强行重新赋值为img最大长度
+            }
+            aImg[index].classList.add("active");//4、添加active类名
+            oTab[index].classList.add("active");
+        };*/
+        /*右边按钮*/
+        /*oRight.onclick = function () {
+            aImg[index].classList.remove("active");//1、删除active类名，先清零
+            oTab[index].classList.remove("active");
+            index++;//2、执行index++
+            /!*index %= len;//if简写%=*!/
+            if(index>len-1){
+                index=0;//判断index如果大于img最大长度，强行重新赋值为0
+            }
+            aImg[index].classList.add("active");//4、添加active类名
+            oTab[index].classList.add("active");
+        };*/
+        /*tab模式选项卡切换*/
+            /*for(let i= 0 ;i<len;i++){
+                oTab[i].onclick =function () {
+                    oTab[index].classList.remove("active");//先删除默认添加与之前被点击元素的active类名
+                    aImg[index].classList.remove("active");
+                    index=i;//把i的值（序号）复制一份给index
+                    oTab[index].classList.add("active");//给当前被点击的元素添加active类名
+                    aImg[index].classList.add("active");
+                }
+            }*/
+    </script>
+</body>
+</html>

@@ -59,17 +59,23 @@
         var size = 16;
         /*字体大小变大*/
         oBox1.onclick = function () {
-            if (size < 30) {
+            if(size>=30)return;
+            size++;
+            oWrap.style.fontSize = size + "px";
+            /*if (size < 30) {
                 size++;
                 oWrap.style.fontSize = size + "px";
-            }
+            }*/
         };
         /*字体大变小*/
         oBox2.onclick = function () {
-            if (size > 12) {
+            if(size<=12)return;
+            size--;
+            oWrap.style.fontSize = size + "px";
+            /*if (size > 12) {
                 size--;
                 oWrap.style.fontSize = size + "px";
-            }
+            }*/
         };
         /*自己写的作业*/
         /*var oBox = document.getElementsByClassName("box");
