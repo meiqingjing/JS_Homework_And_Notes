@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>购物车结算</title>
+    <link rel="stylesheet" href="./css/reset.css">
+    <style>
+        #shop table{
+            margin: 50px auto 0;
+            width: 1000px;
+            border-color: #993300;
+            user-select: none;
+        }
+        #shop tr td{
+            width: 25%;
+        }
+        #shop .title{
+            height: 52px;
+            background-color: #CC3366;
+            color: #fff;
+            font-size: 14px;
+            font-weight: 700;
+            line-height: 52px;
+            text-align: center;
+        }
+        #shop .content{
+            height: 100px;
+            font-size: 14px;
+            text-align: center;
+        }
+        #shop .content img{
+            display: block;
+            margin: 0 auto;
+            width: auto;
+            height: 70px;
+        }
+        #shop .content span{
+            display: inline-block;
+            overflow: hidden;
+            text-align: center;
+            line-height: 32px;
+
+        }
+        #shop .content .reduce{
+            width: 32px;
+            height: 32px;
+            background-color: #DDDDDD;
+            font-weight: 700;
+
+        }
+        #shop .content .number{
+            width: 50px;
+            height: 30px;
+            border-top: 1px solid #dddddd;
+            border-bottom: 1px solid #dddddd;
+        }
+        #shop .content .increase{
+            width: 32px;
+            height: 32px;
+            background-color: #DDDDDD;
+            font-weight: 700;
+        }
+        #shop .cost{
+            margin: 10px auto;
+            width: 1000px;
+            height:50px;
+            background-color: #CC3366;
+        }
+        #shop .cost div{
+            float: right;
+            width: 250px;
+            height: 50px;
+            color: #fff;
+            font-size: 14px;
+            line-height: 50px;
+        }
+        #shop .cost div span{
+            margin-right: 10px;
+            color: #F4D991;
+            font-weight: 700;
+        }
+    </style>
+</head>
+<body>
+    <div id="shop">
+        <table border="1">
+            <thead></thead>
+            <tbody>
+                <tr class="title">
+                    <td>商品</td>
+                    <td>单价</td>
+                    <td>数量</td>
+                    <td>小计</td>
+                </tr>
+                <tr class="content">
+                    <td><img src="./images/shop1.jpg" alt=""></td>
+                    <td><span>8</span></td>
+                    <td>
+                        <span class="reduce">-</span>
+                        <span class="number">0</span>
+                        <span class="increase">+</span>
+                    </td>
+                    <td><span class="subtotal">0</span></td>
+                </tr>
+                <tr class="content">
+                    <td><img src="./images/shop2.jpg" alt=""></td>
+                    <td><span>10</span></td>
+                    <td>
+                        <span class="reduce">-</span>
+                        <span class="number">0</span>
+                        <span class="increase">+</span>
+                    </td>
+                    <td><span class="subtotal">0</span></td>
+                </tr>
+                <tr class="content">
+                    <td><img src="./images/shop3.jpg" alt=""></td>
+                    <td><span>12.5</span></td>
+                    <td>
+                        <span class="reduce">-</span>
+                        <span class="number">0</span>
+                        <span class="increase">+</span>
+                    </td>
+                    <td><span class="subtotal">0</span></td>
+                </tr>
+                <tr class="content">
+                    <td><img src="./images/shop4.jpg" alt=""></td>
+                    <td><span>23</span></td>
+                    <td>
+                        <span class="reduce">-</span>
+                        <span class="number">0</span>
+                        <span class="increase">+</span>
+                    </td>
+                    <td><span class="subtotal">0</span></td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="cost">
+            <div class="price">合计费用：<span>0</span>￥</div>
+            <div class="goods">已经选中商品：<span>0</span>个</div>
+        </div>
+    </div>
+    <script>
+        (function () {
+            /*
+            *在实际开发过程中，数据来源于后台>数据库
+            *前端是先获取了后台给的数据，然后对应渲染生产HTML页面（可以前端执行，可以后台执行）
+            * */
+
+            /*假装拿到了后台的商品数据*/
+            let data = [
+                {dj:8,number:0},
+                {dj:10,number:0},
+                {dj:12.5,number:0},
+                {dj:23,number:0}
+            ];
+
+            /*定义变量*/
+            let aReduce = document.querySelectorAll("#shop .content .reduce"),
+                aNumber = document.querySelectorAll("#shop .content .number"),
+                aIncrease = document.querySelectorAll("#shop .content .increase"),
+                aSubtotal = document.querySelectorAll("#shop .content .subtotal"),
+                oPrice = document.querySelector("#shop .price span"),
+                oGoods = document.querySelector("#shop .goods span");
+            let len = aReduce.length;
+            /*商品增加减少事件*/
+            for(let i=0;i<len;i++){
+                /*商品增加*/
+                aIncrease[i].onclick = function () {
+                    /*操作数据*/
+                    data[i].number++;
+
+                    /*更新页面*/
+                    updatePage(i);
+                };
+                /*商品数量减少*/
+                aReduce[i].onclick = function () {
+                    /*操作数据*/
+                    if(!data[i].number)return;//判断number等于0时停止减少
+                    //if(data[i].number === 0)return;//判断number等于0时停止减少
+                    data[i].number--;
+
+                    /*更新页面*/
+                    updatePage(i);
+                };
+            }
+            /*HTML页面操作函数*/
+            function updatePage(i){
+                /*操作页面*/
+                aNumber[i].innerHTML = data[i].number;//商品个数
+                aSubtotal[i].innerHTML = data[i].dj * data[i].number;//商品价格小计
+                /*计算商品总数与总价*/
+                oGoods.innerHTML = getTotal().oGoods;//商品总个数
+                oPrice.innerHTML = getTotal().oPrice;//商品总价格
+            };
+            /*商品总数计算与总价计算函数*/
+            function getTotal(){
+                /*声明变量保存商品数据*/
+                let g = 0 ;
+                let p = 0;
+                /*循环计算购物车总商品个数及总价格*/
+                for(let i=0;i<len;i++){
+                    g += data[i].number;//商品个数
+                    p += data[i].number * data[i].dj;//单件商品价格小计
+                }
+                return {
+                    oGoods:g,//返回商品总个数
+                    oPrice:p//返回商品总价格
+                };
+            }
+        })();
+    </script>
+</body>
+</html>

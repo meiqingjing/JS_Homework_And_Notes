@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>星级评分</title>
+    <link rel="stylesheet" href="./css/reset.css">
+    <style>
+        #box{
+            margin: 50px auto;
+            width: 500px;
+            height: 300px;
+        }
+        #box span{
+            float: left;
+            margin-top: 36px;
+            margin-right: 8px;
+            color: #FF0000;
+            font-size: 14px;
+        }
+        #box ul{
+            float: left;
+        }
+        #box .star{
+            margin: 36px 20px 0 0;
+        }
+        #box .star li{
+            float: left;
+            width: 19px;
+            height: 19px;
+            background: url("./images/star.png");
+        }
+        #box .star li.active{
+            background-position: 0 19px;
+        }
+        #box .score{
+            width: 120px;
+            height: 80px;
+            border: 1px solid #b7b7b7;
+        }
+        #box .score li{
+            display: none;
+        }
+        #box .score li.active{
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div id="box">
+        <span>星级评分:</span>
+        <!--星星模块-->
+        <ul class="star">
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+        <!--评分提示-->
+        <ul class="score">
+            <li class="active">提示：请认真给当前文章打分</li>
+            <li>很不满意</li>
+            <li>不满意</li>
+            <li>满意</li>
+            <li>很满意</li>
+            <li>非常满意</li>
+        </ul>
+    </div>
+    <script>
+        (function () {
+            /*定义变量*/
+            let aStarLi = document.querySelectorAll("#box .star li");
+            let aScoreLi = document.querySelectorAll("#box .score li");
+            let len = aStarLi.length;
+            let oUL = document.querySelector("#box .star");
+            let index = -1;//记录点击之前的初始值，初始值不是0
+            /*样式控制函数*/
+            function view(index) {
+                /*操作小星星的样式*/
+                for (let j=0;j<len;j++){
+                    aStarLi[j].classList[j<=index?"add":"remove"]("active");
+                }
+                /*操作评分提示li的显示*/
+                for (let j=0;j<aScoreLi.length;j++){
+                    aScoreLi[j].classList.remove("active");
+                }
+                aScoreLi[index+1].classList.add("active");
+            }
+            for(let i=0;i<len;i++){
+                /*添加移入事件*/
+                aStarLi[i].onmouseenter = function () {
+                    view(i);
+                }
+                /*li 添加点击事件，点击之后改变index值，以便于离开之后的页面变化操作*/
+                aStarLi[i].onclick = function () {
+                    index = i;//记录当前序号
+                };
+            }
+            /*添加移出还原事件*/
+            oUL.onmouseleave = function () {
+                view(index);
+            }
+        })();
+        /*for(let i=0;i<len;i++){
+            /!*添加移入事件*!/
+            aStarLi[i].onmouseenter = function () {
+                /!*通过序号 i ，可以判断前后*!/
+                /!*操作小星星的样式*!/
+                //三目写法
+                for (let j=0;j<len;j++){
+                    aStarLi[j].classList[j<=i?"add":"remove"]("active");
+                }
+                //for加判断写法
+                /!*for (let j=0;j<len;j++){
+                    if(j<=i){
+                        aStarLi[j].classList.add("active");
+                    }else {
+                        aStarLi[j].classList.remove("active");
+                    }
+                }*!/
+
+                //两个for循环写法
+                /!*for (let j=0;j<=i;j++){/!*i前面的加名字*!/
+                    aStarLi[j].classList.add("active");
+                }
+                for(let j=i+1;j<len;j++){/!*i后面的去掉名字*!/
+                    aStarLi[j].classList.remove("active");
+                }*!/
+
+                /!*操作评分提示li的显示*!/
+                for (let j=0;j<aScoreLi.length;j++){
+                    aScoreLi[j].classList.remove("active");
+                }
+                aScoreLi[i+1].classList.add("active");
+            };
+
+            /!*li 添加点击事件，点击之后改变index值，以便于离开之后的页面变化操作*!/
+            aStarLi[i].onclick = function () {
+                index = i;
+            };
+        }*/
+    </script>
+</body>
+</html>
